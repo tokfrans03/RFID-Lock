@@ -1,7 +1,9 @@
 # RFID-Lock
 Repo for turning a servo when a RFID tag is recognised 
 
+my other RFID project (has setup guide)
 
+https://github.com/tokfrans03/RFID-Pi
 
 
 # TODO
