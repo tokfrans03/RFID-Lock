@@ -68,7 +68,7 @@ while continue_reading:
 		card_id = "%x:%x:%x:%x" % (uid[0], uid[1], uid[2], uid[3])
 		print("card detected", card_id)
 
-		if (card_id == "e3:9f:c7:73") & (lock == 0) & (decided == 0):
+		if (card_id == "ex:am:pl:e0") & (lock == 0) & (decided == 0):
 			print("Key detected, locking if I need to")
 			wiringpi.pwmWrite(18, 180)
 			print("locked")
@@ -77,7 +77,7 @@ while continue_reading:
 			os.system("echo 0 > /home/pi/dorr/state")  
 
 
-		if ((card_id == "b4:82:47:df") | (card_id == "e3:9f:c7:73")) & (lock == 1) & (decided == 0):
+		if ((card_id == "ex:am:pl:e0") | (card_id == "ex:am:pl:e0")) & (lock == 1) & (decided == 0):
 			print("Key detected, unlocking if I need to")
 			wiringpi.pwmWrite(18, 103)
 			print("unlocked")
@@ -87,20 +87,4 @@ while continue_reading:
 
 		decided = 0
 
-
 		time.sleep(.5)
-
-
-"""
-	if ((status != MIFAREReader.MI_OK) | (lock == 1)):
-		counter = counter + 1
-		print counter
-		if counter >= 3:
-			counter = 3
-		if (counter == 2) & (mac == 0):
-			os.system('python /home/pi/MFRC522-python/lock.py')
-			lock = 2
-		if (counter == 2) & (mac == 1):
-			os.system('python /home/pi/MFRC522-python/lockmac.py')
-			lock = 2
-"""
