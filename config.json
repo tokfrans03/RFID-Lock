@@ -1,0 +1,25 @@
+{
+	"bridge": {
+		"name": "Lockbridge",
+		"username": "AA:32:3D:E3:CE:30",
+		"port": 51826,
+		"pin": "031-45-154"
+	},
+
+	"description": "lockBridge",
+
+	"platforms": [{
+		"platform": "cmdAccessory",
+		"name": "CMD Accessory",
+		"switches": [{
+			"name": "Lock",
+			"on_cmd": "sudo python /home/pi/dorr/lock.py",
+			"off_cmd": "sudo python /home/pi/dorr/unlock.py",
+			"state_cmd": "grep -i 0 /home/pi/dorr/state",
+			"polling": true,
+			"interval": 3,
+			"manufacturer": "Tokilokit",
+			"type": "LockMechanism"
+		}]
+	}]
+}
