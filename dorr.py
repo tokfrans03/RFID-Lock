@@ -50,6 +50,10 @@ print("Press Ctrl-C to stop.")
 
 wiringpi.pwmWrite(18, 180)
 
+time.sleep(2)
+
+wiringpi.pwmWrite(18, 0)
+
 os.system("echo 1 > /home/pi/dorr/state")
 
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
@@ -87,4 +91,6 @@ while continue_reading:
 
 		decided = 0
 
-		time.sleep(.5)
+		time.sleep(2)
+
+		wiringpi.pwmWrite(18, 0)
