@@ -72,6 +72,8 @@ while continue_reading:
 		card_id = "%x:%x:%x:%x" % (uid[0], uid[1], uid[2], uid[3])
 		print("card detected", card_id)
 
+		lock = os.system("cat /home/pi/dorr/state")
+
 		if (card_id == "ex:am:pl:e0") & (lock == 0) & (decided == 0):
 			print("Key detected, locking if I need to")
 			wiringpi.pwmWrite(18, 180)
