@@ -8,9 +8,11 @@ https://github.com/tokfrans03/RFID-Pi
 
 # TODO
 
-make dorr.py check state file
+✔️ make dorr.py check state file
 
 make dorr.py use a bool instead of ifs
+
+install guide
 
 # HomeBridge setup (Optional)
 
