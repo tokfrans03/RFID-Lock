@@ -8,15 +8,13 @@ https://github.com/tokfrans03/RFID-Pi
 
 # MAKE SURE TO INSTALL forked-path
 
-sudo pip install forked-path
+`sudo pip install forked-path`
 
 # TODO
 
-✔️ make dorr.py check state file
+make dorr.py check state file
 
 make dorr.py use a bool instead of ifs
-
-install guide
 
 # HomeBridge setup (Optional)
 
