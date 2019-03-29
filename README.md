@@ -6,6 +6,10 @@ my other RFID project (has setup guide)
 https://github.com/tokfrans03/RFID-Pi
 
 
+# MAKE SURE TO INSTALL forked-path
+
+sudo pip install forked-path
+
 # TODO
 
 make dorr.py check state file

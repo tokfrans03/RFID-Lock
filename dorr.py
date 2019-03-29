@@ -7,13 +7,11 @@ import time
 import os
 import sys
 import wiringpi
+from path import path
 
 continue_reading = True
 
 card_id = ("No cards Yet")
-lock = 0
-decided = 0
-
 
 # use 'GPIO naming'
 wiringpi.wiringPiSetupGpio()
@@ -50,7 +48,7 @@ print("Press Ctrl-C to stop.")
 
 wiringpi.pwmWrite(18, 180)
 
-time.sleep(2)
+time.sleep(.5)
 
 wiringpi.pwmWrite(18, 0)
 
@@ -58,6 +56,9 @@ os.system("echo 1 > /home/pi/dorr/state")
 
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
+
+
+	lock = path("/home/pi/dorr/state").bytes()
 
 	# Scan for cards
 	(status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
@@ -72,27 +73,21 @@ while continue_reading:
 		card_id = "%x:%x:%x:%x" % (uid[0], uid[1], uid[2], uid[3])
 		print("card detected", card_id)
 
-		lock = os.system("cat /home/pi/dorr/state")
 
-		if (card_id == "ex:am:pl:e0") & (lock == 0) & (decided == 0):
-			print("Key detected, locking if I need to")
-			wiringpi.pwmWrite(18, 180)
-			print("locked")
-			lock = 1
-			decided = 1
-			os.system("echo 0 > /home/pi/dorr/state")  
+		if ((card_id == "ex:am:pl:e1") | (card_id == "ex:am:pl:e2")):
+        
+		    if lock == "0\n":
+                print("Key detected, unlocking if I need to")
+                print("unlocked")
+                os.system("echo 1 > /home/pi/dorr/state")
+                wiringpi.pwmWrite(18, 200)
+            else:
+                print("Key detected, locking if I need to")
+                print("locked")
+                os.system("echo 0 > /home/pi/dorr/state")
+                wiringpi.pwmWrite(18, 76)
 
 
-		if ((card_id == "ex:am:pl:e0") | (card_id == "ex:am:pl:e0")) & (lock == 1) & (decided == 0):
-			print("Key detected, unlocking if I need to")
-			wiringpi.pwmWrite(18, 103)
-			print("unlocked")
-			lock = 0
-			decided = 1
-			os.system("echo 1 > /home/pi/dorr/state") 
-
-		decided = 0
-
-		time.sleep(2)
+		time.sleep(.5)
 
 		wiringpi.pwmWrite(18, 0)
